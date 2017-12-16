@@ -1,11 +1,23 @@
 {
   "name": "AppContactos",
   "app_id": "",
-  "type": "ionic1",
-  "integrations": {
-    "gulp": {},
-    "cordova": {}
+  "watch": {
+    "sass": [
+      "scss/**/*.scss"
+    ],
+    "html": [
+      "www/**/*.html"
+    ],
+    "livereload": [
+      "www/**/*.html",
+      "www/**/*.js",
+      "www/**/*.css"
+    ]
   },
+  "integrations": {
+    "gulp": {}
+  },
+  "type": "ionic1",
   "watchPatterns": [
     "scss/**/*",
     "www/**/*",
