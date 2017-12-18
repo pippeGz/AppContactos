@@ -18,12 +18,12 @@
             controller: 'MenuCtrl'
           })
         
-          .state('app.search', {
-            url: '/search',
+          .state('app.info', {
+            url: '/info',
             views: {
               'menuContent': {
-                templateUrl: 'app/search/search.html',
-                controller: 'SearchCtrl'
+                templateUrl: 'app/info/info.html',
+                controller: 'InfoCtrl'
               }
             }
           })

@@ -9,6 +9,6 @@
         'app.contacts',
         'app.login',
         'app.menu',
-        'app.search'
+        'app.info'
     ])
 })();
