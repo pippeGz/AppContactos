@@ -1,7 +1,20 @@
 <ion-view view-title="Contactos" class="contacts">
+  
+  <ion-nav-buttons side="right">
+    <button class="button buttons button-clear header-item" ui-sref="app.add-contact" ng-click="GoToAddContact()">
+      <i class="icon ion-plus-circled"></i>
+    </button>
+  </ion-nav-buttons>
+  
   <ion-content class="contacts">
+    <div class="list list-inset">
+      <label class="item item-input">
+        <i class="icon ion-search placeholder-icon"></i>
+        <input type="text" placeholder="Buscar: Contacto" ng-model="busqueda">
+      </label>
+    </div>
     <ion-list>
-      <ion-item ng-repeat="contact in contacts" href="#/app/contact/{{contact.id}}">
+      <ion-item ng-repeat="contact in contacts | filter : busqueda" href="#/app/contact/{{contact.id}}">
         {{contact.name}}
       </ion-item>
     </ion-list>

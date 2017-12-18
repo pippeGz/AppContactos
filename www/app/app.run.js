@@ -2,7 +2,13 @@
     'use strict';
     angular
         .module('app')
-        .run( runApp );
+        .value('Credentials',{
+            'dirApi': 'https://jsonplaceholder.typicode.com/users',
+            'correo': 'andresgomezmorales1@gmail.com',
+            'token': '123456789',
+            'Content-Type': 'application/json'
+        })
+        .run( runApp );        
 
     function runApp($ionicPlatform){
         $ionicPlatform.ready(function() {
@@ -18,4 +24,5 @@
             }
         });
     }
+    
 })();
