@@ -3,9 +3,9 @@
     angular
         .module('app')
         .value('Credentials',{
-            'dirApi': 'https://jsonplaceholder.typicode.com/users',
-            'correo': 'andresgomezmorales1@gmail.com',
-            'token': '123456789',
+            'dirApi': 'https://app.alegra.com/api/v1/contacts/',
+            'email': 'TuCorreo@mail.com',
+            'token': 'token123456',
             'Content-Type': 'application/json'
         })
         .run( runApp );        
@@ -24,5 +24,5 @@
             }
         });
     }
-    
+
 })();

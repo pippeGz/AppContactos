@@ -10,14 +10,12 @@
         $urlRouterProvider.otherwise('/app/contacts');
 
         $stateProvider
-        
             .state('app', {
             url: '/app',
             abstract: true,
             templateUrl: 'app/menu/menu.html',
             controller: 'MenuCtrl'
           })
-        
           .state('app.info', {
             url: '/info',
             views: {
@@ -27,7 +25,15 @@
               }
             }
           })
-        
+          .state('app.tutorial', {
+            url: '/tutorial',
+            views: {
+              'menuContent': {
+                templateUrl: 'app/tutorial/tutorial.html',
+                controller: 'tutorialCtrl'
+              }
+            }
+          })
           .state('app.add-contact', {
               url: '/add-contact',
               views: {
@@ -37,16 +43,15 @@
                 }
               }
             })
-            .state('app.contacts', {
-              url: '/contacts',
-              views: {
-                'menuContent': {
-                  templateUrl: 'app/contacts/contacts.html',
-                  controller: 'ContactsCtrl'
-                }
+          .state('app.contacts', {
+            url: '/contacts',
+            views: {
+              'menuContent': {
+                templateUrl: 'app/contacts/contacts.html',
+                controller: 'ContactsCtrl'
               }
-            })
-        
+            }
+          })
           .state('app.contact', {
             url: '/contact/:playlistId',
             views: {

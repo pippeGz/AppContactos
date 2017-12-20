@@ -1,7 +1,7 @@
 <ion-view view-title="Contactos" class="contacts">
   
   <ion-nav-buttons side="right">
-    <button class="button buttons button-clear header-item" ui-sref="app.add-contact" ng-click="GoToAddContact()">
+    <button class="button buttons button-clear header-item" ui-sref="app.add-contact">
       <i class="icon ion-plus-circled"></i>
     </button>
   </ion-nav-buttons>
@@ -10,13 +10,33 @@
     <div class="list list-inset">
       <label class="item item-input">
         <i class="icon ion-search placeholder-icon"></i>
-        <input type="text" placeholder="Buscar: Contacto" ng-model="busqueda">
+        <input type="text" placeholder="Buscar: Contacto/Email" ng-model="busqueda">
       </label>
     </div>
+    <ion-refresher
+        pulling-text="Recargar"
+        pulling-icon="ion-android-refresh calm"
+        on-refresh="doRefresh()"
+        spinner="ripple">
+    </ion-refresher>
     <ion-list>
-      <ion-item ng-repeat="contact in contacts | filter : busqueda" href="#/app/contact/{{contact.id}}">
-        {{contact.name}}
-      </ion-item>
+      <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="contact in contacts | filter : busqueda" type="item-text-wrap" href="#/app/contact/{{contact.id}}">
+        <img src="img/{{contact.letter}}.svg">
+        <h2>{{contact.name}}</h2>
+        <p>{{contact.email}}</p>
+        <i class="icon ion-chevron-right icon-accessory"></i>
+        <ion-option-button class="button-assertive" ng-click="actionDelete({{contact.id}},$index)" >
+          Eliminar
+        </ion-option-button>
+      </ion-item>      
     </ion-list>
+    <ion-infinite-scroll 
+      ng-cloak
+      ng-if="moreDataCanBeLoad()"
+      on-infinite="loadMore()"
+      distance="1%"
+      immediate-check="false"
+      spinner="dots">
+    </ion-infinite-scroll>
   </ion-content>
 </ion-view>

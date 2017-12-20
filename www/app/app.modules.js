@@ -7,7 +7,7 @@
         'app.add-contact',
         'app.contact',
         'app.contacts',
-        'app.login',
+        'app.tutorial',
         'app.menu',
         'app.info'
     ])
