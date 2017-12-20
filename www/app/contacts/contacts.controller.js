@@ -4,33 +4,40 @@
         .module('app.contacts')
         .controller('ContactsCtrl', ContactsCtrl);
 
-        function ContactsCtrl($scope, alegraService,loadings,ionicAlert,$ionicPopup){
-            $scope.start = 0;
-            $scope.cantRegistServ = 0;
-            $scope.infiniteScrollComplete = true;
-            $scope.contacts=[];//$rootScope
-            
-            loadings.show();
-            alegraService.getContacts($scope.start)
-            .success(function(result){
-                console.log(result);
-                for(var i=0; i<result.data.length; i++){
-                    $scope.text = result.data[i].name;
-                    $scope.initialletter = $scope.text.charAt(0);
-                    result.data[i].letter=$scope.initialletter;
-                }
-                $scope.contacts=result.data;
-                $scope.cantRegistServ=result.metadata.total;
-                $scope.start=$scope.contacts.length;
-                console.log($scope.contacts);
-                console.log($scope.cantRegistServ); 
-                console.log($scope.start); 
-                loadings.hide();
-            })
-            .error(function(error){
-                ionicAlert.show("Error","Error al traer datos del servidor code: ",error);
-                loadings.hide();
+        function ContactsCtrl($scope, alegraService,loadings,ionicAlert,$ionicPopup,$ionicHistory){
+
+            $scope.$on('$ionicView.enter', function(){
+                $ionicHistory.clearHistory();
+                $scope.start = 0;
+                $scope.cantRegistServ = 0;
+                $scope.infiniteScrollComplete = true;
+                $scope.contacts=[];//$rootScope
+                load();
             });
+            
+            function load(){
+                loadings.show();
+                alegraService.getContacts($scope.start)
+                .success(function(result){
+                    console.log(result);
+                    for(var i=0; i<result.data.length; i++){
+                        $scope.text = result.data[i].name;
+                        $scope.initialletter = $scope.text.charAt(0);
+                        result.data[i].letter=$scope.initialletter;
+                    }
+                    $scope.contacts=result.data;
+                    $scope.cantRegistServ=result.metadata.total;
+                    $scope.start=$scope.contacts.length;
+                    console.log($scope.contacts);
+                    console.log($scope.cantRegistServ); 
+                    console.log($scope.start); 
+                    loadings.hide();
+                })
+                .error(function(error){
+                    ionicAlert.showError("Error","Error al traer datos del servidor code: ",error);
+                    loadings.hide();
+                });
+            }
             
             $scope.doRefresh = function(){
                 $scope.contacts=[];
@@ -53,7 +60,7 @@
                     $scope.$broadcast('scroll.refreshComplete');
                 })
                 .error(function(error){
-                    ionicAlert.show("Error","Error al traer datos del servidor code: ",error);
+                    ionicAlert.showError("Error","Error al traer datos del servidor code: ",error);
                     console.log("Error al traer datos, Respuesta del servidor:"+error);
                     $scope.$broadcast('scroll.refreshComplete');
                 });
@@ -80,12 +87,11 @@
                             console.log('load more success');
                             $scope.infiniteScrollComplete = true;
                             $scope.$broadcast('scroll.infiniteScrollComplete');
-                            ionicAlert.show("Mas datos","load more success",$scope.infiniteScrollComplete);
                         }else if($scope.start == $scope.cantRegistServ){
                             for(var i=0; i<result.data.length; i++){
                                 $scope.contacts.push(result.data[i]);
                             }
-                            console.log('load more error if')
+                            console.log('Variables iguales no hay mas datos para cargar')
                             $scope.infiniteScrollComplete = false;
                             $scope.$broadcast('scroll.infiniteScrollComplete');
                         }else{
@@ -96,7 +102,7 @@
                     })
                     .error(function(error){
                         console.log(error);
-                        ionicAlert.show("Error","Error al traer datos del servidor code: ",error);
+                        ionicAlert.showError("Error","Error al traer datos del servidor code: ",error);
                         $scope.$broadcast('scroll.infiniteScrollComplete');
                     });
             }
@@ -123,7 +129,7 @@
                             })
                             .error(function(error){
                                 console.log(error);
-                                ionicAlert.show("Error","Error al traer datos del servidor code: ",error);
+                                ionicAlert.showError("Error","Error al traer datos del servidor code: ",error);
                                 loadings.hide();
                             });
                     }

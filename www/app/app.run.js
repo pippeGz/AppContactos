@@ -3,7 +3,7 @@
     angular
         .module('app')
         .value('Credentials',{
-            'dirApi': 'https://app.alegra.com/api/v1/contacts/',
+            'dirApi': 'https://app.alegra.com/api/v1/contacts',
             'email': 'TuCorreo@mail.com',
             'token': 'token123456',
             'Content-Type': 'application/json'

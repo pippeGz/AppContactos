@@ -6,10 +6,17 @@
 
     function ionicAlert($ionicPopup){
         return {
-            show: function alertIonic(tit,msg,err) {
+            showError: function alertIonic(tit,msg,err) {
                 var alertPopup = $ionicPopup.alert({
                   title: tit,
                   template: msg+err
+                });
+                return alertPopup;
+            },
+            showAlert: function alertIonic(tit,msg) {
+                var alertPopup = $ionicPopup.alert({
+                  title: tit,
+                  template: msg
                 });
                 return alertPopup;
             }
