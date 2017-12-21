@@ -5,7 +5,7 @@
         .value('Credentials',{
             'dirApi': 'https://app.alegra.com/api/v1/contacts',
             'email': 'TuCorreo@mail.com',
-            'token': 'token123456',
+            'token': 'TuToken',
             'Content-Type': 'application/json'
         })
         .run( runApp );        

@@ -1,35 +1,32 @@
-<ion-view view-title="Contactos" class="contacts">
-  
+<ion-view view-title="Contactos">
+  <!-- Botón para ir a la vista de crear contactos-->
   <ion-nav-buttons side="right">
     <button class="button buttons button-clear header-item" ui-sref="app.add-contact">
       <i class="icon ion-plus-circled"></i>
     </button>
   </ion-nav-buttons>
-  
+  <!-- Contenido -->
   <ion-content class="contacts">
-    <div class="list list-inset">
-      <label class="item item-input">
-        <i class="icon ion-search placeholder-icon"></i>
-        <input type="text" placeholder="Buscar: Contacto/Email" ng-model="busqueda">
-      </label>
-    </div>
+    <!-- Pull to refresh -->
     <ion-refresher
         pulling-text="Recargar"
         pulling-icon="ion-android-refresh calm"
         on-refresh="doRefresh()"
         spinner="ripple">
     </ion-refresher>
+    <!-- Lista de Contactos -->
     <ion-list>
       <ion-item class="item-remove-animate item-avatar item-icon-right" ng-repeat="contact in contacts | filter : busqueda" type="item-text-wrap" href="#/app/contact/{{contact.id}}">
-        <img src="img/{{contact.letter}}.svg">
+        <img src="img/abcdario/{{contact.letter}}.svg">
         <h2>{{contact.name}}</h2>
         <p>{{contact.address.city}}</p>
         <i class="icon ion-chevron-right icon-accessory"></i>
-        <ion-option-button class="button-assertive" ng-click="actionDelete({{contact.id}},$index)" >
+        <ion-option-button class="icon-left ion-trash-a button-assertive" ng-click="actionDelete({{contact.id}},$index)" >
           Eliminar
         </ion-option-button>
       </ion-item>      
     </ion-list>
+    <!-- Scroll infinito -->
     <ion-infinite-scroll 
       ng-cloak
       ng-if="moreDataCanBeLoad()"
@@ -39,4 +36,11 @@
       spinner="dots">
     </ion-infinite-scroll>
   </ion-content>
+  <!-- Buscador -->
+  <div class="bar bar-footer item-input-inset bar-calm">
+    <label class="item-input-wrapper">
+      <i class="icon ion-ios-search placeholder-icon"></i>
+      <input type="text" placeholder="Buscar por: Contacto/Ciudad" ng-model="busqueda">
+    </label>
+  </div>
 </ion-view>

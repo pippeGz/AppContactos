@@ -1,5 +1,177 @@
 <ion-view view-title="Detalle Contacto">
-  <ion-content>
-    <h1>Playlist</h1>
+  
+  <ion-nav-buttons side="right">
+    <button class="button buttons button-clear header-item" ng-click="actionDelete(contact.id)">
+      <i class="icon ion-trash-a"></i>
+    </button>
+  </ion-nav-buttons>
+
+  <ion-content class="contact">
+    <div class="card cardPrincipal" ng-if="contactDelete==true">
+      <div class="divImgContact">
+        <img src="img/logotipos/trash.png">
+        <h3>¡El contacto se eliminó!</h3>
+        <p class="padding texto">
+          Por favor regresa a la pagina de Contactos para seguir explorando.
+        </p>
+      </div>
+    </div>
+    <div class="card cardPrincipal" ng-if="contactDelete==false">
+      <div class="divImgContact">
+        <img src="img/logotipos/user.png">
+        <h3>{{contact.name}}</h3>
+        <h4>{{contact.type[0]}}</h4>
+        <p class="padding texto" ng-if="contact.identification!=null">
+          # Identificacion: {{contact.identification}}
+        </p>
+      </div>
+      <div class="card">
+        <div class="list">
+            <a class="item item-avatar" >
+              <img src="img/logotipos/id.png">
+              <h2> Datos de Contacto:</h2>
+            </a>
+            <div ng-if="contact.email!=null">
+              <div class="item item-divider item-royal">
+                  Correo electrónico:
+              </div>
+                <a class="item item-icon-left">
+                  <i class="icon ion-at royal"></i>
+                  {{contact.email}}
+                </a>
+            </div>
+            <div ng-if="contact.mobile!=null">
+              <div class="item item-divider item-royal">
+                Celular:
+              </div>
+                <a class="item item-icon-left">
+                  <i class="icon ion-android-phone-portrait royal"></i>
+                  {{contact.mobile}}
+                </a>  
+            </div>
+            <div ng-if="contact.phonePrimary!=null">
+              <div class="item item-divider item-royal">
+                Teléfono 1:
+              </div>
+                <a class="item item-icon-left">
+                  <i class="icon ion-android-call royal"></i>
+                  {{contact.phonePrimary}}
+                </a>              
+            </div>
+            <div ng-if="contact.phoneSecondary!=null">
+              <div class="item item-divider item-royal">
+                  Teléfono 2:
+              </div>
+                <a class="item item-icon-left">
+                  <i class="icon ion-android-call royal"></i>
+                  {{contact.phoneSecondary}}
+                </a>
+            </div>
+            <div ng-if="contact.fax!=null">
+              <div class="item item-divider item-royal">
+                Fax:
+              </div>
+                <a class="item item-icon-left">
+                  <i class="icon ion-android-print royal"></i>
+                  {{contact.fax}}
+                </a>
+            </div>
+            <div ng-if="contact.address.address!=null">
+              <div class="item item-divider item-royal">
+                Dirección:
+              </div>
+                <a class="item item-icon-left">
+                  <i class="icon ion-android-home royal"></i>
+                  {{contact.address.address}}
+                </a>
+            </div>
+            <div ng-if="contact.address.city!=null">
+              <div class="item item-divider item-royal">
+                Ciudad:
+              </div>
+                <a class="item item-icon-left">
+                  <i class="icon ion-android-map royal"></i>
+                  {{contact.address.city}}
+                </a>
+            </div>
+        </div>
+      </div>
+      <div class="card">
+          <div class="list">
+              <a class="item item-avatar" >
+                <img src="img/logotipos/money.png">
+                <h2>Datos Financieros:</h2>
+              </a>
+              <div ng-if="contact.seller!=null">
+                <div class="item item-divider item-royal">
+                    Vendedor:
+                </div>
+                  <a class="item item-icon-left">
+                    <i class="icon ion-briefcase royal"></i>
+                    <div class="list list-inset">
+                        <div class="item">
+                          Nombre: {{contact.seller.name}}
+                        </div>
+                        <div class="item">
+                          ID: {{contact.seller.identification}}
+                        </div>
+                    </div>
+                  </a>
+              </div>
+              <div ng-if="contact.term!=null">
+                <div class="item item-divider item-royal">
+                  Tipo de Contrato:
+                </div>
+                  <a class="item item-icon-left">
+                    <i class="icon ion-document-text royal"></i>
+                    <div class="list list-inset">
+                        <div class="item">
+                          Tipo: {{contact.term.name}}
+                        </div>
+                        <div class="item">
+                          Días: {{contact.term.days}}
+                        </div>
+                    </div>
+                  </a>  
+              </div>
+              <div ng-if="contact.priceList!=null">
+                <div class="item item-divider item-royal">
+                  Lista de Precios:
+                </div>
+                  <a class="item item-icon-left">
+                    <i class="icon ion-clipboard royal"></i>
+                    {{contact.priceList.name}}
+                  </a>              
+              </div>
+              <div ng-if="contact.internalContacts.length
+              !=0">
+                <div class="item item-divider item-royal">
+                  Contactos Internos:
+                </div>
+                  <div ng-repeat="contactInt in contact.internalContacts" class="list list-inset">
+                      <div class="item">
+                        Nombres:{{contactInt.name}}
+                      </div>
+                      <div class="item">
+                        Apellidos:{{contactInt.lastName}}
+                      </div>
+                      <div class="item">
+                        Email:{{contactInt.email}}
+                      </div>
+                      <div class="item">
+                        Tel:{{contactInt.phone}}
+                      </div>
+                      <div class="item">
+                        Cel:{{contactInt.mobile}}
+                      </div>
+                      <div class="item">
+                        notifica: {{contactInt.sendNotifications}}
+                      </div>
+                      <div class="item item-divider"></div>
+                  </div>
+              </div>
+          </div>
+        </div>
+    </div>
   </ion-content>
 </ion-view>

@@ -4,7 +4,7 @@
         .module('app.tutorial')
         .controller('tutorialCtrl', tutorialCtrl);
 
-        function tutorialCtrl($scope){
-
+        function tutorialCtrl($scope,$ionicSlideBoxDelegate){
+            
         }
 })();

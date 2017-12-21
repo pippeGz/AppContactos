@@ -5,7 +5,7 @@
         .factory('alegraService',  alegraService);
 
     function alegraService(Credentials,$http){
-///////////////////////////////////////////////////// Utility Functions /////////////////////////////////////////////////////
+      /*Inicio de Funciones de utilidad*/
         function getCitys() {
           var citys=[
             {'id':0,'value':'','text':'Seleccione'},
@@ -48,15 +48,11 @@
         function codificar(str) {
           return window.btoa(unescape(encodeURIComponent(str)));
         }
-///////////////////////////////////////////////////// Utility Functions /////////////////////////////////////////////////////
-///////////////////////////////////////////////////// Services Functions /////////////////////////////////////////////////////
-      console.log(Credentials.email);
-      console.log(Credentials.token);
+    /*Fin de Funciones de utilidad*/    
+//////////////// Services Functions /////////////////////////////////////////////////////
       var data = Credentials.email+':'+Credentials.token;
-      console.log(data);
-      var base64encodeData = codificar(data);
-      console.log(base64encodeData);
-
+      var base64encodeData = codificar(data);//Datos codificados en base64
+      /**Funcion para cargar la lista de contactos */
       function getContacts(start) {
         return $http.get(Credentials.dirApi+encodeURI('?metadata=true&start='+start),{
           headers:{
@@ -65,7 +61,16 @@
           json:true
         });
       };
-
+      /**Funcion para cargar un contacto en específico */
+      function getContact(idContact) {
+        return $http.get(Credentials.dirApi+'/'+idContact,{
+          headers:{
+            'Authorization': ' Basic ' + base64encodeData
+          },
+          json:true
+        });
+      };
+      /**Funcion para eliminar un contacto */
       function deleteContact(contactId) {
         return $http.delete(Credentials.dirApi+'/'+contactId,{
           headers:{
@@ -74,7 +79,7 @@
           json:true
         });
       };
-
+      /**Funcion para crear un contacto */
       function createContact(dataContact) {
         return $http.post(Credentials.dirApi,dataContact,{
           headers:{
@@ -84,11 +89,13 @@
         });
       };
 ///////////////////////////////////////////////////// Services Functions /////////////////////////////////////////////////////
+      /**Funciones que se retornan*/
       var services = {
         getContacts: getContacts,
         deleteContact: deleteContact,
         createContact: createContact,
-        getCitys: getCitys
+        getCitys: getCitys,
+        getContact: getContact,
       };
         
       return services;

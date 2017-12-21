@@ -6,6 +6,7 @@
 
     function ionicAlert($ionicPopup){
         return {
+            //Muestra un alert con mensaje para errores
             showError: function alertIonic(tit,msg,err) {
                 var alertPopup = $ionicPopup.alert({
                   title: tit,
@@ -13,6 +14,7 @@
                 });
                 return alertPopup;
             },
+            //Muestra un alert
             showAlert: function alertIonic(tit,msg) {
                 var alertPopup = $ionicPopup.alert({
                   title: tit,

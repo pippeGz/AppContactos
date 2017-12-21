@@ -53,7 +53,7 @@
             }
           })
           .state('app.contact', {
-            url: '/contact/:playlistId',
+            url: '/contact/:Id',
             views: {
               'menuContent': {
                 templateUrl: 'app/contact/contact.html',
